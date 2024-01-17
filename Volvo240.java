@@ -17,7 +17,7 @@ public class Volvo240 extends Car{
         stopEngine();
     }
     
-    public int getNrDoors(){
+    private int getNrDoors(){
         return nrDoors;
     }
     public double getEnginePower(){
