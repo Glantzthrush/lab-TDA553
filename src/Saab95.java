@@ -4,15 +4,17 @@ public class Saab95 extends Car{
 
     private boolean turboOn;
     
-    public Saab95(boolean turboOn){
+    public Saab95(){
         super(2,Color.red,125,"Saab95");
-        this.turboOn = turboOn;
+        this.turboOn = false;
         stopEngine();
     }
+
     @Override
     public int getNrDoors(){
         return nrDoors;
     }
+    @Override
     public double getEnginePower(){
         return enginePower;
     }
@@ -60,11 +62,13 @@ public class Saab95 extends Car{
     }
     
     // TODO fix this method according to lab pm
+    @Override
     public void gas(double amount){
         incrementSpeed(amount);
     }
 
     // TODO fix this method according to lab pm
+    @Override
     public void brake(double amount){
         decrementSpeed(amount);
     }
