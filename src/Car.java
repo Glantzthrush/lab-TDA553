@@ -53,27 +53,70 @@ public abstract class Car implements Movable{
         direction = (direction + 1) % 4;
     }
 
-    public abstract int getNrDoors();
+    public int getNrDoors(){
+        return nrDoors;
+    }
 
-    public abstract double getEnginePower();
+    public double getEnginePower(){
+        return enginePower;
+    }
 
-    public abstract double getCurrentSpeed();
+    public double getCurrentSpeed(){
+        return currentSpeed;
+    }
 
-    public abstract Color getColor();
+    public Color getColor(){
+        return color;
+    }
 
-    public abstract void setColor(Color clr);
+    public void setColor(Color clr){
+        color = clr;
+    }
 
-    public abstract void startEngine();
+    public void startEngine(){
+        currentSpeed = 0.1;
+    }
 
-    public abstract void stopEngine();
+    public void stopEngine(){
+        currentSpeed = 0;
+    }
 
     public abstract double speedFactor();
 
-    public abstract void incrementSpeed(double amount);
+    public void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+        if(currentSpeed > enginePower){
+            currentSpeed = enginePower;
+        }
+    }
 
-    public abstract void decrementSpeed(double amount);
+    public void decrementSpeed(double amount){
+        if (getCurrentSpeed() > enginePower){
+            currentSpeed = enginePower;
+        }
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        if (currentSpeed < 0){
+            currentSpeed = 0;
+        }
 
-    public abstract void gas(double amount);
+    }
 
-    public abstract void brake(double amount);
+    public void gas(double amount){
+        if(amount < 0 || amount > 1){
+            throw new IllegalArgumentException("Wrong gas amount. Insert amount between 0 and 1");
+        }
+        double oldSpeed = currentSpeed;
+        incrementSpeed(amount);
+        if(oldSpeed > currentSpeed){
+
+        }
+
+    }
+
+    public void brake(double amount){
+        if(amount < 0 || amount > 1){
+            throw new IllegalArgumentException("Wrong break amount. Insert amount between 0 and 1");
+        }
+        decrementSpeed(amount);
+    }
 }
