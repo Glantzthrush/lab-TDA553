@@ -45,7 +45,7 @@ public abstract class Car implements Movable{
 
     @Override
     public void turnLeft() {
-        direction = (direction - 1) % 4;
+        direction = (direction + 3) % 4;
     }
 
     @Override
@@ -84,10 +84,11 @@ public abstract class Car implements Movable{
     public abstract double speedFactor();
 
     public void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
-        if(currentSpeed > enginePower){
-            currentSpeed = enginePower;
+        if(getCurrentSpeed() < 0){
+            currentSpeed = 0;
         }
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+
     }
 
     public void decrementSpeed(double amount){
@@ -95,22 +96,13 @@ public abstract class Car implements Movable{
             currentSpeed = enginePower;
         }
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-        if (currentSpeed < 0){
-            currentSpeed = 0;
-        }
-
     }
 
     public void gas(double amount){
         if(amount < 0 || amount > 1){
             throw new IllegalArgumentException("Wrong gas amount. Insert amount between 0 and 1");
         }
-        double oldSpeed = currentSpeed;
         incrementSpeed(amount);
-        if(oldSpeed > currentSpeed){
-
-        }
-
     }
 
     public void brake(double amount){
