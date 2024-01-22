@@ -3,13 +3,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.awt.*;
 public class testCar {
-
-    Saab95 saab = new Saab95();
-    Volvo240 volvo = new Volvo240();
+    private Saab95 saab;
+    private Volvo240 volvo;
     @Before
-    public void init(){
-
+    public void setup(){
+        saab = new Saab95();
+        volvo = new Volvo240();
     }
+
     @Test
     public void testVolvoChangeColor(){
         volvo.setColor(Color.red);
